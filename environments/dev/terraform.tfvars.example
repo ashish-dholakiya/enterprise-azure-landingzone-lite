@@ -1,0 +1,9 @@
+location = "centralindia"
+
+tags = {
+  environment = "dev"
+  project     = "enterprise-azure-landingzone-lite"
+  owner       = "your-name"
+  cost_center = "personal-lab"
+  managed_by  = "terraform"
+}
