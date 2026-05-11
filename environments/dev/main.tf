@@ -1,7 +1,7 @@
 module "resource_group" {
   source = "../../modules/resource-group"
 
-  resource_group_name = "rg-dev-centralindia-01"
+  resource_group_name = local.resource_group_name
   location            = var.location
-  tags                = var.tags
+  tags                = local.common_tags
 }
