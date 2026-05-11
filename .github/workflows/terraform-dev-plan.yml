@@ -1,0 +1,46 @@
+name: Terraform Dev Plan
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "environments/dev/**"
+      - "modules/**"
+      - ".github/workflows/terraform-dev-plan.yml"
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "environments/dev/**"
+      - "modules/**"
+      - ".github/workflows/terraform-dev-plan.yml"
+
+jobs:
+  terraform-plan:
+    name: Terraform Plan - Dev
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: environments/dev
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
