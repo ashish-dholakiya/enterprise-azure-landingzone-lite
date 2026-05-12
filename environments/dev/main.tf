@@ -15,3 +15,21 @@ module "vnet" {
   address_space       = ["10.10.0.0/16"]
   tags                = local.common_tags
 }
+
+module "subnet_app" {
+  source = "../../modules/subnet"
+
+  name                 = "snet-${local.resource_prefix}-dev-app-${local.location_short}-01"
+  resource_group_name  = local.resource_group_name
+  virtual_network_name = "vnet-${local.resource_prefix}-dev-${local.location_short}-01"
+  address_prefixes     = ["10.10.1.0/24"]
+}
+
+module "subnet_mgmt" {
+  source = "../../modules/subnet"
+
+  name                 = "snet-${local.resource_prefix}-dev-mgmt-${local.location_short}-01"
+  resource_group_name  = local.resource_group_name
+  virtual_network_name = "vnet-${local.resource_prefix}-dev-${local.location_short}-01"
+  address_prefixes     = ["10.10.2.0/24"]
+}
