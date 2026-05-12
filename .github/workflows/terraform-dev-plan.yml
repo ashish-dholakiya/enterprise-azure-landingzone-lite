@@ -26,6 +26,10 @@ jobs:
     name: Terraform Plan - Dev
     runs-on: ubuntu-latest
 
+    env:
+      TF_INPUT: false
+      TF_VAR_location: centralindia
+
     defaults:
       run:
         working-directory: environments/dev
@@ -54,4 +58,4 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -input=false
