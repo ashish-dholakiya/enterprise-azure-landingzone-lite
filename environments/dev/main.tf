@@ -33,3 +33,21 @@ module "subnet_mgmt" {
   virtual_network_name = "vnet-${local.resource_prefix}-dev-${local.location_short}-01"
   address_prefixes     = ["10.10.2.0/24"]
 }
+
+module "nsg_app" {
+  source = "../../modules/nsg"
+
+  name                = "nsg-${local.resource_prefix}-dev-app-${local.location_short}-01"
+  location            = var.location
+  resource_group_name = local.resource_group_name
+  tags                = local.common_tags
+}
+
+module "nsg_mgmt" {
+  source = "../../modules/nsg"
+
+  name                = "nsg-${local.resource_prefix}-dev-mgmt-${local.location_short}-01"
+  location            = var.location
+  resource_group_name = local.resource_group_name
+  tags                = local.common_tags
+}
